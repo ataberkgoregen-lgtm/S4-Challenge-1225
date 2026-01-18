@@ -114,3 +114,125 @@ const restoran = {
     şeker: 45,
   },
 };
+
+// SORU 1 - TAMAMLANDI -
+function menudeAra(menu, clbck) {
+  let sonuc = [];
+
+  for (let items of menu) {
+    const filteredVal = items.urunler.filter(clbck);
+
+    for (let x of filteredVal) {
+      sonuc.push({
+        ad: x.ad,
+        fiyat: x.fiyat,
+        kalori: x.kalori,
+        icerik: x.malzemeler,
+      });
+    }
+  }
+  return sonuc;
+}
+
+// İstenilen Filtre yapılabilir. !
+const geriDonme = (value) =>
+  value.fiyat < 200 &&
+  value.malzemeler.includes("domates") &&
+  value.kalori <= 500;
+
+// console.log(menudeAra(restoran.menuler, geriDonme));
+
+// SORU 2 -USTUNDE CALISILIYOR-
+
+function siparisiIsle(siparis) {
+  const orders = [];
+  let a = [];
+  let c = [];
+  for (let ordr of siparis) {
+    a = ordr.urunler;
+    for (let x of a) {
+      const b = x.urunId;
+      c.push(b);
+    }
+  }
+
+  console.log(c);
+
+  for (let f of restoran.menuler) {
+    for (let w of f.urunler) {
+      w.forEach((element) => {
+        for (let i of c) {
+          if (element.id === i) {
+            console.log(element);
+          }
+        }
+      });
+    }
+  }
+}
+
+const islem = (item) => item.urunler;
+
+siparisiIsle(restoran.siparisler);
+
+// const healthy_food = menudeAra(restoran.menuler, (obj) => {
+//   for (let item of obj) {
+//     for (let elements of item.urunler) {
+// if (
+//   elements.fiyat < 400 &&
+//   elements.kalori < 500 &&
+//   elements.malzemeler.includes("domates")
+// ) {
+//   console.log(elements.ad);
+// }
+//     }
+//   }
+// });
+
+// console.log(healthy_food);
+
+// readline Node JS'te girdi almamızı sağlayan şey.
+// const readline = require("readline");
+
+//rl artık girdi alabilir ve terminale çıktı verebilir.
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout,
+// });
+
+// stdin klavyeden gelen veri, stdout terminale yazdılırılan veri. rl soru sorup cevap alabliyor demek oluyor.
+
+// function dynamicQ() {
+//   const arr = [];
+//   rl.question("Lütfen Fiyat üst limiti giriniz: ", (answer) => {
+//     const cevap = Number(answer);
+//     if (Number.isInteger(cevap) === false) {
+//       console.log("Lütfen sayı giriniz..");
+//       return dynamicQ();
+//     } else {
+//       console.log("Fiyat alınmıştır..");
+//       arr.push(cevap);
+//     }
+
+//     rl.question("Lütfen Üst kalori limitinizi girin: ", (qua) => {
+//       const kalori1 = Number(qua);
+//       if (Number.isInteger(kalori1) === false) {
+//         console.log("Lütfen sayı giriniz..");
+//         return dynamicQ();
+//       } else {
+//         console.log("Kalori alınmıştır..");
+//         arr.push(kalori1);
+//       }
+
+//       rl.question("İçinde olmasını istediğiniz malzemleri giriniz: ", (qua) => {
+//         const malzeme = qua;
+//         arr.push(malzeme);
+//       });
+//     });
+
+//     return arr;
+//   });
+// }
+
+// console.log(dynamicQ());
+// menudeAra(restoran, dynamicQ);
